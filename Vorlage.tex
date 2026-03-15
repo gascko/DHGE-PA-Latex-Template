@@ -1,25 +1,3 @@
-\iffalse
-########## Dokumentation ##########
-
-++++ Allgemein ++++
-
-- DHGE Vorgaben             (https://www.dhge.de/DHGE/dam/jcr:6e5d8217-0965-42fe-8982-c7515c12f0b9/Hinweise_und_Empfehlungen_schr_Arb_Technik_Gera_2023.pdf)
-- VSCode Integration        (https://marketplace.visualstudio.com/items?itemName=James-Yu.latex-workshop)
-- Rechtschreibung (VSCode)  (https://marketplace.visualstudio.com/items?itemName=ltex-plus.vscode-ltex-plus)
-
-++++ Installation ++++
-  
-MacOS   (https://www.tug.org/mactex/)
-Linux   (https://wiki.debian.org/Latex)
-Windows (https://miktex.org/)
-
-++++ Latex ++++
-
-Latex   (https://www.latex-project.org/help/documentation/)
-
-##################################
-\fi
-
 % ########## Dokument Einstellungen ########## %
 \documentclass[a4paper, 11pt]{article}
 
@@ -33,6 +11,7 @@ Latex   (https://www.latex-project.org/help/documentation/)
 \usepackage[style=alphabetic, url=true, dateabbrev=false]{biblatex}
 \usepackage{setspace, titlesec, tocloft, csquotes, fancyhdr, enumitem, pifont, footnote, arial, caption, amsmath, amssymb, amsthm, amsfonts, framed, siunitx}
 \usepackage[T1]{fontenc}
+\usepackage[table]{xcolor}
 
 % ++++++++  Grafiken +++++++++ %
 
@@ -41,7 +20,7 @@ Latex   (https://www.latex-project.org/help/documentation/)
 
 % ++++++++ Fußnoten und Verlinkung +++++++++ %
 
-\usepackage{hyperref}
+\usepackage[hidelinks]{hyperref}
 \usepackage{tablefootnote}
 
 % ########## Verknüpfte Strukturen ########## %
@@ -176,31 +155,32 @@ fill=green!30]
 
 % ########## Bewertungskreise 1-5 ########## %
 
-\newlength{\ratingsize}
-\setlength{\ratingsize}{5pt} % Größe
-\newcommand{\ratingsep}{0.25em} % horizontaler Abstand zwischen Kreisen
+\definecolor{lightgray}{RGB}{230,230,230}
+\definecolor{circlecolor}{RGB}{100,100,250}
 
-% Nutzung: \rating{<wert>}{<max>}{<farbe>}
-\newcommand{\rating}[3]{%
+\newlength{\ratingsize}
+\setlength{\ratingsize}{5pt}
+\newcommand{\ratingsep}{0.25em}
+
+\newcommand{\ratingcircle}[1]{%
   \begingroup
-  \count0=#1\relax
-  \count1=#2\relax
-  \loop\ifnum\count0>0
-    \tikz[baseline=-0.6ex]{\fill[#3] (0,0) circle (\ratingsize);}%
-    \hspace{\ratingsep}%
-    \advance\count0 by -1
-  \repeat
-  \count2=\numexpr #2-#1\relax
-  \loop\ifnum\count2>0
-    \tikz[baseline=-0.6ex]{\draw[#3, line width=0.6pt] (0,0) circle (\ratingsize);}%
-    \hspace{\ratingsep}%
-    \advance\count2 by -1
-  \repeat
+  \begin{tikzpicture}[baseline=-0.6ex]
+    \draw[circlecolor, line width=0.6pt] (0,0) circle (\ratingsize);
+    \pgfmathsetmacro{\ang}{360*(#1)}
+    \ifdim\ang pt>0pt
+      \fill[circlecolor]
+        (0,0) -- (90:\ratingsize)
+        arc[start angle=90, end angle=90+\ang, radius=\ratingsize] -- cycle;
+    \fi
+  \end{tikzpicture}%
   \endgroup
 }
 
-% Nutzung: \ratingfive{<wert>}  → max=5, farbe=teal
-\newcommand{\ratingfive}[1]{\rating{#1}{5}{teal}}
+\newcommand{\rating}[1]{%
+  \foreach \v in {#1}{%
+    \ratingcircle{\v}\hspace{\ratingsep}%
+  }%
+}
 
 % ########## Kopf-/ & Fußzeile ########## %
 
@@ -222,6 +202,11 @@ fill=green!30]
     \rfoot{\thepage}
 	}
 }
+
+% ########## Tabellen Einstellungen ########## %
+
+\newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
+
 
 % ########## Verzeichnis Einstellungen ########## %
 
@@ -303,7 +288,7 @@ fill=green!30]
   \newunit\newblock
   \printfield{title}%
   \adddot\space
-  \newunit\newblock
+  \newunit\newblock\newline
   \printfield{number}%
   \addcomma
   \newunit\newblock
@@ -787,6 +772,22 @@ Spalte 1 & Spalte 2 & Spalte 3 \\
 
 \newpage
 
+\subsection{Bewertungskreise}
+
+\rating{0,0,0,0,0}\newline
+\rating{1,0,0,0,0}\newline
+\rating{1,1,0,0,0}\newline
+\rating{1,1,1,0,0}\newline
+\rating{1,1,1,1,0}\newline
+\rating{1,1,1,1,1}\newline
+\newline
+\rating{1,1,1,0.15,0}\newline
+\rating{1,1,1,0.25,0}\newline
+\rating{1,1,1,0.5,0}\newline
+\rating{1,1,1,0.75,0}\newline
+\rating{1,1,1,0.9,0}\newline
+\newpage
+
 \subsection{Ordnerstrukturen}
 
 \href{https://de.mirrors.cicku.me/ctan/macros/generic/dirtree/dirtree.pdf}{Bedienungsanleitung (dirtree)}
@@ -974,6 +975,6 @@ Anhang 3: \nameref{Anhang:3} \dotfill&\pageref{Anhang:3}\\
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[clip, trim=0cm 2cm 0cm 3.5cm, width=1\textwidth]{Eigenständigkeitserklärung.pdf}
+%    \includegraphics[clip, trim=0cm 2cm 0cm 3.5cm, width=1\textwidth]{Eigenständigkeitserklärung.pdf}
 \end{figure}
 \end{document}

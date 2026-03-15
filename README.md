@@ -21,3 +21,17 @@ This is my latex template for university thesis matching the [criterias](https:/
 [Latex Workshop Plugin](https://marketplace.visualstudio.com/items?itemName=James-Yu.latex-workshop)
 
 [Spelling & Grammar Plugin](https://marketplace.visualstudio.com/items?itemName=ltex-plus.vscode-ltex-plus)
+
+# Usefull Links for writing a project thesis
+
+* [Wikipedia](https://de.wikipedia.org/wiki/Wikipedia:Hauptseite) (For basic information and starting point for research)
+* [DIN Terminology](https://www.din.de/de/service-fuer-anwender/terminologie/din-term/anmeldung) (For technical terms and definitions)
+* [Google Scholar](https://scholar.google.com/) (For finding scientific papers and articles)
+* [Google Books](https://books.google.com/) (For finding books and literature on the topic)
+* [DHGE Bibliothek](https://bibsuche.dhge.de/Search/) (For accessing academic resources and publications)
+* [Crossref](https://search.crossref.org/search/works?q=) (Fiding metadata of scientific publications)
+* [MIT OpenCourseWare](https://ocw.mit.edu/) (For free online courses and educational materials)
+* [ArXiv](https://arxiv.org/search/)(Finding papers in different scientific fields)
+* [Statista](https://de.statista.com/homepage) (For finding statistics and data on various topics)
+* [Electropedia](https://www.electropedia.org/) (For finding definitions and explanations of electrical engineering terms)
+* [ISO Online Browsing Platform](https://www.iso.org/obp/ui) (For finding international standards and guidelines)
