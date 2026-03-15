@@ -31,7 +31,7 @@ This is my latex template for university thesis matching the [criterias](https:/
 * [DHGE Bibliothek](https://bibsuche.dhge.de/Search/) (For accessing academic resources and publications)
 * [Crossref](https://search.crossref.org/search/works?q=) (Fiding metadata of scientific publications)
 * [MIT OpenCourseWare](https://ocw.mit.edu/) (For free online courses and educational materials)
-* [ArXiv](https://arxiv.org/search/)(Finding papers in different scientific fields)
+* [ArXiv](https://arxiv.org/search/) (Finding papers in different scientific fields)
 * [Statista](https://de.statista.com/homepage) (For finding statistics and data on various topics)
 * [Electropedia](https://www.electropedia.org/) (For finding definitions and explanations of electrical engineering terms)
 * [ISO Online Browsing Platform](https://www.iso.org/obp/ui) (For finding international standards and guidelines)
