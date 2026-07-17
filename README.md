@@ -1,10 +1,8 @@
-# Latex template for DHGE project thesis
+# Latex Vorlage für Projektarbeiten an der [DHGE](https://www.dhge.de/DHGE/)
 
-This is my latex template for university thesis matching the [criterias](https://www.dhge.de/DHGE/dam/jcr:6e5d8217-0965-42fe-8982-c7515c12f0b9/Hinweise_und_Empfehlungen_schr_Arb_Technik_Gera_2023.pdf) of the [DHGE](https://www.dhge.de/)
+> [Anforderungen](https://www.dhge.de/DHGE/dam/jcr:6e5d8217-0965-42fe-8982-c7515c12f0b9/Hinweise_und_Empfehlungen_schr_Arb_Technik_Gera_2023.pdf)
 
-> You have to maintain the list of appendices manually
-
-# Getting Latex
+# Latex
 
 [MacOS](https://www.tug.org/mactex/)
 
@@ -12,9 +10,9 @@ This is my latex template for university thesis matching the [criterias](https:/
 
 [Windows](https://miktex.org/)
 
-> Under windows [Perl](https://strawberryperl.com/) is required
+> Unter Windows wird [Perl](https://strawberryperl.com/) benötigt
 
-# VSCode (optional)
+# VSCode (Optional)
 
 [latexmk](https://mg.readthedocs.io/latexmk.html)
 
@@ -22,16 +20,16 @@ This is my latex template for university thesis matching the [criterias](https:/
 
 [Spelling & Grammar Plugin](https://marketplace.visualstudio.com/items?itemName=ltex-plus.vscode-ltex-plus)
 
-# Usefull Links for writing a project thesis
+# Nützliche Links für die Recherche
 
-* [Wikipedia](https://de.wikipedia.org/wiki/Wikipedia:Hauptseite) (For basic information and starting point for research)
-* [DIN Terminology](https://www.din.de/de/service-fuer-anwender/terminologie/din-term/anmeldung) (For technical terms and definitions)
-* [Google Scholar](https://scholar.google.com/) (For finding scientific papers and articles)
-* [Google Books](https://books.google.com/) (For finding books and literature on the topic)
-* [DHGE Bibliothek](https://bibsuche.dhge.de/Search/) (For accessing academic resources and publications)
-* [Crossref](https://search.crossref.org/search/works?q=) (Fiding metadata of scientific publications)
-* [MIT OpenCourseWare](https://ocw.mit.edu/) (For free online courses and educational materials)
-* [ArXiv](https://arxiv.org/search/) (Finding papers in different scientific fields)
-* [Statista](https://de.statista.com/homepage) (For finding statistics and data on various topics)
-* [Electropedia](https://www.electropedia.org/) (For finding definitions and explanations of electrical engineering terms)
-* [ISO Online Browsing Platform](https://www.iso.org/obp/ui) (For finding international standards and guidelines)
+* [Wikipedia](https://de.wikipedia.org/wiki/Wikipedia:Hauptseite)
+* [DIN Terminology](https://www.din.de/de/service-fuer-anwender/terminologie/din-term/anmeldung)
+* [Google Scholar](https://scholar.google.com/)
+* [Google Books](https://books.google.com/)
+* [DHGE Bibliothek](https://bibsuche.dhge.de/Search/)
+* [Crossref](https://search.crossref.org/search/works?q=)
+* [MIT OpenCourseWare](https://ocw.mit.edu/)
+* [ArXiv](https://arxiv.org/search/)
+* [Statista](https://de.statista.com/homepage)
+* [Electropedia](https://www.electropedia.org/)
+* [ISO Online Browsing Platform](https://www.iso.org/obp/ui)
