@@ -1,3 +1,18 @@
+% ########## Anforderungen ########## %
+
+% https://www.computerix.info/skripten/baccarbeit.pdf
+
+% - Struktur:  Hauptteil - Anhänge - Glossar - Literatur
+% - Maximal 85 Zeichen pro Zeile
+% - Kapitelnummer & -titel der ersten oder zweiten Ebene in linken Footer
+% - Anhänge Zählung: A.1, A.2, B.1 
+% - Romische Seitennummerierung von Inhaltsverzeichnis bis zur Einleitung danach Arabisch (rechst unten)
+% - Glosar statt Abkürzungsverzeichnis, Format: Hanging Indent, Referenzen (Klickbar) von Begriffen auf das Glosar aus dem Text, Glossar hinter Anhang aber vor Literaturverzeichnis
+% - Abstract, hinter dem Deckblatt und Sperrvermerk & vor dem Inhaltsverzeichnis
+% - Seitenzahl im Inhaltsverzeichnis rechts unten außen
+% -  Literaturverweise nicht in Fußnoten auslagern, sondern inline im Text angeben
+% - Das Literaturverzeichnis muss alphabetisch nach Zitatschlüsseln sortiert sein, nicht alphabetisch nach Autorennamen
+
 % ########## Stammdaten ########## %
 
 \newcommand{\Titel}{Vorlage zur Erstellung von Projektarbeiten an der Dualen-Hochschule-Gera-Eisenach}
@@ -15,6 +30,7 @@
 
 % ########## Dokument Einstellungen ########## %
 
+\DocumentMetadata{ pdfstandard = A-2b, lang = de }
 \documentclass[a4paper, 11pt]{article}
 
 % ##########  Pakete ########## %
@@ -38,8 +54,10 @@
   amsthm,
   siunitx,
   soul,
+  mathpazo,
   DHGEBiblatex
 }
+
 \usepackage[T1]{fontenc}
 \usepackage[table]{xcolor}
 
@@ -77,10 +95,12 @@
 \setlength{\fboxrule}{1pt}
 \setlength{\fboxsep}{0pt}
 
-% ########## Text ########## %
+% Aufzählung Kapitel.Zähler
+\usepackage{chngcntr}
+\counterwithin{figure}{section}
+\counterwithin{table}{section}
 
-\usepackage[scaled]{helvet}
-\renewcommand{\familydefault}{\sfdefault}
+% ########## Text ########## %
 
 % Nummern gleich formattiert wie Text
 \sisetup{mode = text, detect-family = true, detect-weight = true}
@@ -112,20 +132,9 @@
 \pagestyle{fancy}
 \renewcommand{\headrulewidth}{0pt}
 \fancyhf{}
+\fancyfoot[L]{}
 \fancyfoot[R]{\thepage}
 \addtolength{\skip\footins}{3pc}
-
-% Textstyle Inhaltsverzeichnis
-\fancypagestyle{sxoli1}{
-  \fancyhf{}
-  \pagenumbering{Roman}
-  \rfoot{\thepage}
-  \renewcommand{\headrulewidth}{0pt}
-  \renewcommand{\footrulewidth}{0pt}
-	\fancypagestyle{plain}{
-    \rfoot{\thepage}
-	}
-}
 
 % ########## Verzeichnis Einstellungen ########## %
 
@@ -143,6 +152,7 @@
 \setlength{\cftsubsubsecindent}{0px}
 
 % ########## Dokument Beginn ########## %
+
 \begin{document}
 % Keine Seitenzahlen auf Deckblatt und Sperrvermerk
 \pagenumbering{gobble}
@@ -191,6 +201,7 @@
 \newpage
 
 % ########## Sperrvermerk ########## %
+
 \begin{center}
   \vspace*{5.5cm}
   {\LARGE\bf Sperrvermerk}
@@ -204,34 +215,30 @@ Eine Vervielfältigung und Veröffentlichung der Projektarbeit ist auch auszugsw
 
 Die Vervielfältigung und Veröffentlichung der Projektarbeit sowie die Einsichtnahme durch Dritte bedarf der ausdrücklichen
 Zustimmung des Verfassers und des Unternehmens.
-\newpage
+\clearpage
 
 % Römische Seitenzahl
 \pagenumbering{Roman}
+\setcounter{page}{1}
 
 % ########## Inhaltsverzeichnis ########## %
-\pagestyle{sxoli1}
-\renewcommand{\contentsname}{Inhaltsverzeichnis}
+
 \tableofcontents
 \newpage
 
 % ########## Abbildungsverzeichnis ########## %
 
-\section*{Abbildungsverzeichnis}
-\addcontentsline{toc}{section}{Abbildungsverzeichnis}
-
+\section{Abbildungsverzeichnis}
 \renewcommand\listfigurename{}
 \setlength{\cftfigindent}{0em}
-\setlength{\cftfignumwidth}{6.5em}
+\setlength{\cftfignumwidth}{8em}
 \renewcommand{\cftfigpresnum}{Abbildung }
 \listoffigures
 \newpage
 
 % ########## Tabellenverzeichnis ########## %
 
-\section*{Tabellenverzeichnis}
-\addcontentsline{toc}{section}{Tabellenverzeichnis}
-
+\section{Tabellenverzeichnis}
 \renewcommand\listtablename{}
 \setlength{\cfttabindent}{0em}
 \setlength{\cfttabnumwidth}{5.5em}
@@ -240,9 +247,8 @@ Zustimmung des Verfassers und des Unternehmens.
 \newpage
 
 % ########## Abkürzungsverzeichnis ########## %
-\phantomsection
-\section*{Abkürzungsverzeichnis}
-\addcontentsline{toc}{section}{Abkürzungsverzeichnis}
+
+\section{Abkürzungsverzeichnis}
 \begin{acronym}[**********]
   \acro{DHGE}{Duale Hochschule Gera Eisenach}
   \acro{VM}{Virtuelle Maschine}
@@ -254,10 +260,9 @@ Zustimmung des Verfassers und des Unternehmens.
 % Falls Plural abweichend
 \acrodefplural{VM}[VMs]{Virtuelle Maschinen}
 
-% Letzte Seite mit römischer Seitenzahl speichern & Arabische Zahlen verwenden
-\newcounter{savepage}
-\setcounter{savepage}{\number\value{page}}
+% Arabische Seitenzahlen & Beginn bei 1
 \pagenumbering{arabic}
+\setcounter{page}{1}
 
 % ########## Text ########## %
 
@@ -513,64 +518,44 @@ int tls1_process_heartbeat(SSL *s) {
 
 % ########## Literaturverzeichnis ########## %
 
-% Römische Seitenzahlen fortsetzen
-\pagenumbering{Roman}
-\setcounter{page}{\value{savepage}}
-
-\phantomsection
-\section*{Literaturverzeichnis}
-\addcontentsline{toc}{section}{Literaturverzeichnis}
-\renewcommand\refname{}
+\section{Literaturverzeichnis}
 \printbibliography
 \newpage
 
 % ########## Anlagen ########## %
-\phantomsection
-\section*{Anlagenverzeichnis}
-\addcontentsline{toc}{section}{Anlagenverzeichnis}
-\captionsetup[figure]{list=no}
-\setcounter{figure}{0}
-\renewcommand{\figurename}{Anhang}
-\renewcommand{\thefigure}{\arabic{figure}}
 
-% Anlagenverzeichnis (muss manuell geführt werden)
-\renewcommand\tabularxcolumn[1]{b{#1}}
-\renewcommand*{\arraystretch}{1.5}
-\begin{tabularx}{\textwidth}{Xr}
-\multicolumn{2}{c}{}\\
-Anhang 1: \nameref{Anhang:1} \dotfill&\pageref{Anhang:1}\\
-Anhang 2: \nameref{Anhang:2} \dotfill&\pageref{Anhang:2}\\
-Anhang 3: \nameref{Anhang:3} \dotfill&\pageref{Anhang:3}\\
-\end{tabularx}
-\newpage
+\appendix
 
-% ########## Anlage 1 ########## %
+% ########## Anlage A ########## %
+
+\section{Anlage A}
+\label{Anhang:A}
 
 \begin{figure}[!ht]
-  \caption[Titel im Anlagenverzeichnis Anlage 1]{Titel Anlage 1}
-  \label{Anhang:1}
   \centering
   \frame{\includegraphics[angle=-90, width=\textwidth]{example-image-a}}
 \end{figure}
 \newpage
 
-% ########## Anlage 2 ########## %
+% ########## Anlage B ########## %
 
 \begin{landscape}
+\section{Anlage B}
+\label{Anhang:B}
+
   \begin{figure}[!ht]
-    \caption[Titel im Anlagenverzeichnis Anlage 2]{Titel Anlage 2}
-    \label{Anhang:2}
     \centering
     \frame{\includegraphics[width=1.2\textwidth]{example-image-a}}
   \end{figure}
-  \end{landscape}
-  \newpage
+\end{landscape}
+\newpage
 
-% ########## Anlage 3 ########## %
+% ########## Anlage C ########## %
+
+\section{Anlage C}
+\label{Anhang:C}
 
 \begin{figure}[!ht]
-  \caption[Titel im Anlagenverzeichnis Anlage 3]{Titel Anlage 3}
-  \label{Anhang:3}
   \centering
   \frame{\includegraphics[angle=-90, width=\textwidth]{example-image-a}}
 \end{figure}
