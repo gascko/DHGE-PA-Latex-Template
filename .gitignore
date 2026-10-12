@@ -4,6 +4,9 @@
 *.blg
 *.brf
 *.fls
+*.gls
+*.glg
+*.ist
 *.fdb_latexmk
 *.glo
 *.idx

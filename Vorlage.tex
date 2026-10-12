@@ -2,17 +2,6 @@
 
 % https://www.computerix.info/skripten/baccarbeit.pdf
 
-% - Struktur:  Hauptteil - Anhänge - Glossar - Literatur
-% - Maximal 85 Zeichen pro Zeile
-% - Kapitelnummer & -titel der ersten oder zweiten Ebene in linken Footer
-% - Anhänge Zählung: A.1, A.2, B.1 
-% - Romische Seitennummerierung von Inhaltsverzeichnis bis zur Einleitung danach Arabisch (rechst unten)
-% - Glosar statt Abkürzungsverzeichnis, Format: Hanging Indent, Referenzen (Klickbar) von Begriffen auf das Glosar aus dem Text, Glossar hinter Anhang aber vor Literaturverzeichnis
-% - Abstract, hinter dem Deckblatt und Sperrvermerk & vor dem Inhaltsverzeichnis
-% - Seitenzahl im Inhaltsverzeichnis rechts unten außen
-% -  Literaturverweise nicht in Fußnoten auslagern, sondern inline im Text angeben
-% - Das Literaturverzeichnis muss alphabetisch nach Zitatschlüsseln sortiert sein, nicht alphabetisch nach Autorennamen
-
 % ########## Stammdaten ########## %
 
 \newcommand{\Titel}{Vorlage zur Erstellung von Projektarbeiten an der Dualen-Hochschule-Gera-Eisenach}
@@ -31,13 +20,12 @@
 % ########## Dokument Einstellungen ########## %
 
 \DocumentMetadata{ pdfstandard = A-2b, lang = de }
-\documentclass[a4paper, 11pt]{article}
+\documentclass[a4paper, 12pt]{article}
 
 % ##########  Pakete ########## %
 
 % ++++++++ Text +++++++++ %
-
-\usepackage{acronym}
+\usepackage[nottoc]{tocbibind}
 \usepackage[ngerman]{babel}
 \usepackage[style=alphabetic, url=true, dateabbrev=false]{biblatex}
 \addbibresource{bib.bib}
@@ -55,7 +43,7 @@
   siunitx,
   soul,
   mathpazo,
-  DHGEBiblatex
+  DHGEBiblatex,
 }
 
 \usepackage[T1]{fontenc}
@@ -74,6 +62,12 @@
   pdfauthor={\Autor},
   pdfsubject={\Titel},
 }
+
+% ++++++++  Glossar +++++++++ %
+
+\usepackage[toc,section=section]{glossaries}
+\makeglossaries
+\input{Glossar}
 
 % ########## Seiten Einstellungen ########## %
 
@@ -132,9 +126,17 @@
 \pagestyle{fancy}
 \renewcommand{\headrulewidth}{0pt}
 \fancyhf{}
-\fancyfoot[L]{}
+\fancyfoot[L]{\nouppercase{\quad\leftmark}}
 \fancyfoot[R]{\thepage}
 \addtolength{\skip\footins}{3pc}
+
+\fancypagestyle{plain} {
+  \fancyhf{}
+  \fancyfoot[L]{\nouppercase{\quad\leftmark}}
+  \fancyfoot[R]{\thepage}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}
+}
 
 % ########## Verzeichnis Einstellungen ########## %
 
@@ -228,8 +230,6 @@ Zustimmung des Verfassers und des Unternehmens.
 
 % ########## Abbildungsverzeichnis ########## %
 
-\section{Abbildungsverzeichnis}
-\renewcommand\listfigurename{}
 \setlength{\cftfigindent}{0em}
 \setlength{\cftfignumwidth}{8em}
 \renewcommand{\cftfigpresnum}{Abbildung }
@@ -238,27 +238,11 @@ Zustimmung des Verfassers und des Unternehmens.
 
 % ########## Tabellenverzeichnis ########## %
 
-\section{Tabellenverzeichnis}
-\renewcommand\listtablename{}
 \setlength{\cfttabindent}{0em}
 \setlength{\cfttabnumwidth}{5.5em}
 \renewcommand{\cfttabpresnum}{Tabelle }
 \listoftables
 \newpage
-
-% ########## Abkürzungsverzeichnis ########## %
-
-\section{Abkürzungsverzeichnis}
-\begin{acronym}[**********]
-  \acro{DHGE}{Duale Hochschule Gera Eisenach}
-  \acro{VM}{Virtuelle Maschine}
-  \acro{REST}{Representational State Transfer}
-  \acro{RAG}{Retrieval-Augmented Generation}
- \end{acronym}
-\newpage
-
-% Falls Plural abweichend
-\acrodefplural{VM}[VMs]{Virtuelle Maschinen}
 
 % Arabische Seitenzahlen & Beginn bei 1
 \pagenumbering{arabic}
@@ -281,15 +265,15 @@ Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie co
 \newpage
 
 \section{Zitate}
-Ein direktes Zitat \enquote{ist ein Zitat das sehr direkt ist.}\footnote{\cite{DIN.2008}}
+Ein direktes Zitat \enquote{ist ein Zitat das sehr direkt ist.}\cite{DIN.2008}
 
-dolore magna aliquyam erat, sed diam voluptua.\footnote{\cite{Fowler.2006} \cite{GitLab.2025}}
+dolore magna aliquyam erat, sed diam voluptua.\cite{Fowler.2006} \cite{GitLab.2025}
 
-est Lorem ipsum dolor sit amet.\footnote{Ebd.}
+est Lorem ipsum dolor sit amet.
 
 \section{Auflistungen}
 
-Die zentralen Merkmale von \acf{REST} sind:\footnote{Vgl. Ebd.}
+Die zentralen Merkmale von REST sind:
 
 \begin{itemize}
 \item \textbf{Ressourcenidentifikation}\\
@@ -383,35 +367,11 @@ x & \text{ für } x > 100\\
 \qty{6}{\textdollar}
 \newpage
 
-\section{Abkürzungen}
+\section{Glossar nutzen}
 
-\begin{table}[h]
-  \centering
-\begin{tabular}{|l|l|}
-\hline
-\multicolumn{2}{|c|}{\href{https://www.namsu.de/Extra/pakete/Acronym.html}{Bedienungsanleitung (acronym)}}\\
-\hline
-Normal & \ac{DHGE}\\
-\hline
-Abkürzung & \acs{DHGE}\\
-\hline
-Langform & \acl{DHGE}\\
-\hline
-Langform + Abkürzung & \acf{DHGE}\\
-\hline
-Keine Langform + Plural & \acp{DHGE}\\
-\hline
-Kurzform + Plural & \acsp{DHGE}\\
-\hline
-Langform + Plural & \acfp{DHGE}\\
-\hline
-Langform + Abkürzung + Plural & \aclp{DHGE}\\
-\hline
-Abweichender Plural & \acp{VM}\\
-\hline
-\end{tabular}
-\caption{Abkürzungen im Text nutzen}
-\end{table}
+Die Kommunikation erfolgt über eine \gls{api}.
+Beim \gls{cloud} werden IT-Ressourcen über ein Netzwerk bereitgestellt.
+Ein wichtiger Bestandteil davon ist die \gls{virtualisierung}.
 
 \section{Grafiken}
 
@@ -421,22 +381,21 @@ Abweichender Plural & \acp{VM}\\
 \begin{figure}[!ht]
     \centering
     \frame{\includegraphics[width=\textwidth]{example-image-a}}
-    \caption[Ein Bild]{Ein Bild\protect\footnotemark}
+    \caption[Ein Bild]{Ein Bild (\href{https://texdoc.org/serve/graphicx.pdf/0}{Bedienungsanleitung (Graphicx)})}
     \label{fig:ExampleImage}
 \end{figure}
-
-\footnotetext{\href{https://texdoc.org/serve/graphicx.pdf/0}{Bedienungsanleitung (Graphicx)}}
+\newpage
 
 \subsection{Bilder neben Text}
 
 \par\medskip
-\begin{wrapfigure}[12]{r}[0pt]{5cm}
+\begin{wrapfigure}[14]{r}[0pt]{5cm}
     \centering
     \frame{\includegraphics[width=0.3\textwidth]{example-grid-100x100pt}}
-    \caption[Eingerücktes Bild]{Eingerücktes Bild\protect\footnotemark}
+    \caption[Eingerücktes Bild]{Eingerücktes Bild (\href{https://ctan.ebinger.cc/tex-archive/macros/latex/contrib/wrapfig/wrapfig-doc.pdf}{Bedienungsanleitung (wrapfig)})}
     \label{fig:ExampleFloatImage}
 \end{wrapfigure}
-\footnotetext{\href{https://ctan.ebinger.cc/tex-archive/macros/latex/contrib/wrapfig/wrapfig-doc.pdf}{Bedienungsanleitung (wrapfig)}}
+
 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
 Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
 
@@ -456,10 +415,9 @@ Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie co
 \begin{figure}[!ht]
   \centering
     \includegraphics{Grafiken/RAG.pdf}
-  \caption[Vereinfachte Darstellung der Funktionsweise eines \acs{RAG}]{Vereinfachte Darstellung der Funktionsweise eines \acs{RAG}\protect\footnotemark}
+  \caption[Vereinfachte Darstellung der Funktionsweise eines RAG]{Vereinfachte Darstellung der Funktionsweise eines RAG (Darstellung nach \cite{LangChain.2025-Docs-Vektordatenbanken})}
   \label{fig:vektordatenbanken}
 \end{figure}
-\footnotetext{Darstellung nach \cite{LangChain.2025-Docs-Vektordatenbanken} nachgebildet}
 
 \clearpage
 
@@ -481,10 +439,9 @@ number = randint(1, 10)
 def main(argv):
     return 0
 \end{lstlisting}
-\caption[Titel]{Titel\protect\footnotemark}
+\caption[Titel]{Titel (\href{https://texdoc.org/serve/listings.pdf/0}{Bedienungsanleitung (listings)})}
 \label{fig:ExampleCode}
 \end{figure}
-\footnotetext{\href{https://texdoc.org/serve/listings.pdf/0}{Bedienungsanleitung (listings)}}
 
 \sethlcolor{yellow}
 \begin{figure}[!ht]
@@ -500,10 +457,9 @@ int tls1_process_heartbeat(SSL *s) {
   §\hl{n2s(p, payload);}§
   §\hl{pl = p;}§
 \end{lstlisting}
-\caption[Betroffener Code aus der OpenSSL Bibliothek]{Betroffener Code aus der OpenSSL Bibliothek (in \hl{gelb} fehlerhafter Code)\protect\footnotemark}
+\caption[Betroffener Code aus der OpenSSL Bibliothek]{Betroffener Code aus der OpenSSL Bibliothek (in \hl{gelb} fehlerhafter Code) (\href{https://texdoc.org/serve/listings.pdf/0}{Bedienungsanleitung (listings)})}
 \label{fig:ExampleCode2}
 \end{figure}
-\footnotetext{\href{https://texdoc.org/serve/listings.pdf/0}{Bedienungsanleitung (listings)}}
 \clearpage
 
 \subsection{Ordnerstrukturen}
@@ -515,12 +471,6 @@ int tls1_process_heartbeat(SSL *s) {
   \label{fig:Ordnerstrukturen}
 \end{figure}
 \clearpage
-
-% ########## Literaturverzeichnis ########## %
-
-\section{Literaturverzeichnis}
-\printbibliography
-\newpage
 
 % ########## Anlagen ########## %
 
@@ -559,7 +509,17 @@ int tls1_process_heartbeat(SSL *s) {
   \centering
   \frame{\includegraphics[angle=-90, width=\textwidth]{example-image-a}}
 \end{figure}
-\newpage
+\clearpage
+
+% ########## Glossar ########## %
+
+\printglossary
+\clearpage
+
+% ########## Literaturverzeichnis ########## %
+
+\printbibliography[heading=bibintoc]
+\clearpage
 
 % ########## Eigenständigkeitserklärung ########## %
 
